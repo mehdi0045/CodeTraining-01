@@ -16,7 +16,7 @@ namespace InventorySystem
             _conditionsAdd = conditionsAdd;
             _conditionsRemove = conditionsRemove;
         }
-
+        
         public delegate void OnItemAddedDelegate(IInventory inventory, IItem item, int index);
         public event OnItemAddedDelegate OnItemAdded;
 
@@ -35,20 +35,6 @@ namespace InventorySystem
         private ICondition[] _conditionsRemove;
 
         public int _slotCount;
-        
-        #region Events
-
-        protected virtual void OnOnItemAdded(IInventory inventory, IItem item ,int index)
-        {
-            OnItemAdded?.Invoke(inventory, item, index);
-        }
-
-        protected virtual void OnOnItemRemove(IInventory inventory, IItem item,int index)
-        {
-            OnItemRemove?.Invoke(inventory, item,index);
-        }
-
-        #endregion
         
         public void Init()
         {
@@ -131,5 +117,20 @@ namespace InventorySystem
             }
             return new ConditionInventoryCallback(true, (int) EnumInventoryStatuses.Success);
         }
+        
+        #region Events
+
+        protected virtual void OnOnItemAdded(IInventory inventory, IItem item ,int index)
+        {
+            OnItemAdded?.Invoke(inventory, item, index);
+        }
+
+        protected virtual void OnOnItemRemove(IInventory inventory, IItem item,int index)
+        {
+            OnItemRemove?.Invoke(inventory, item,index);
+        }
+
+        #endregion
     }
+    
 }

@@ -1,8 +1,17 @@
-using InventorySystem;
 
-public interface IAction 
+using System.Threading.Tasks;
+using Action.Interface;
+
+namespace Action
 {
-    string Id { get; set; }
-    
-    IInteractionInventoryCallback Action(IActionArgs iArgs);
+    public interface IAction 
+    {
+        string Id { get; set; }
+        
+        string Name { get; set; }
+        
+        IActionStep[] ActionSteps { get; set; }
+        
+        Task<IInteractionCallBack> Action(IActionArgs iArgs);
+    }
 }

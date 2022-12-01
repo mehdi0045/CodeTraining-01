@@ -4,6 +4,6 @@ using UnityEngine;
 
 public enum EnumActionStatus
 {
-    ActionSucces = -1,
-    NotEnough = 0
+    ActionStart = 1,
+    ActionEnd = 0
 }

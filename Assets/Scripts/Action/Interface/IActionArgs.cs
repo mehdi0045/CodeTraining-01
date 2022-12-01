@@ -1,8 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public interface IActionArgs 
+using Action.Interface;
+
+namespace Action.Interface
 {
-    
+    public interface IActionArgs 
+    {
+        IActionTarget Indicator { get; set; }
+
+        IActionTarget[] Targets { get; set; }
+        
+        object[] CustomData { get; set; }
+    }
 }

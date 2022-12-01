@@ -1,32 +1,33 @@
+using InventorySystem;
 using UnityEngine;
 using UnityEngine.UI;
-using InventorySystem;
 
-public class SlotHud : MonoBehaviour
+namespace HUD.Inventory
 {
-    
-    
-    public int index;
-
-    [SerializeField] private Image imageIcon;
-    [SerializeField] private bool fill;
-    
-    private IItem _item;
-
-    public void SetSlot(ItemHud itemHudObject,IItem item)
+    public class SlotHud : MonoBehaviour
     {
-        imageIcon.sprite = itemHudObject.Icon;
-        _item = item;
-        fill = true;
-    }
+        public int index;
+
+        [SerializeField] private Image imageIcon;
+        [SerializeField] private bool fill;
     
-    public void EmptySLot()
-    {
-        if (fill)
+        private IItem _item;
+
+        public void SetSlot(ItemHud itemHudObject,IItem item)
         {
-            imageIcon.sprite = null;
-            _item = null;
-            fill = false;    
+            imageIcon.sprite = itemHudObject.Icon;
+            _item = item;
+            fill = true;
+        }
+    
+        public void EmptySLot()
+        {
+            if (fill)
+            {
+                imageIcon.sprite = null;
+                _item = null;
+                fill = false;    
+            }
         }
     }
 }
