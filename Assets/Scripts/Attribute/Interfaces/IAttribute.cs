@@ -1,5 +1,5 @@
 
-namespace Attribute.Interfaces
+namespace AttributeBase.Interfaces
 {
     public interface IAttribute
     { 

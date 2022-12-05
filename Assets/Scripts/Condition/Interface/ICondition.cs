@@ -1,8 +1,9 @@
-namespace ConditionSystem
+
+namespace Condition.Interface
 {
-    public interface ICondition 
+    public interface ICondition
     {
-        string Id{get; set;}
+        string Id { get; set; }
 
         IConditionCallback Check(IConditionArgs iArgs);
     }

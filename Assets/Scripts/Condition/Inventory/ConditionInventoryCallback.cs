@@ -1,4 +1,6 @@
-namespace ConditionSystem
+using Condition.Interface;
+
+namespace Condition.InventorySystem
 {
     public struct ConditionInventoryCallback : IConditionCallback
     {

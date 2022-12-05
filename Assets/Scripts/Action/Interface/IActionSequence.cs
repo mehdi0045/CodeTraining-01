@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Action.Interface;
 
-namespace Action
+namespace Action.Interface
 {
-    public interface IActionStep 
+    public interface IActionSequence 
     {
         string Id { get; set; }
         

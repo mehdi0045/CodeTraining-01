@@ -1,5 +1,6 @@
+using Action.Interface;
 
-namespace Action
+namespace Action.Base
 {
     public class BaseInteractionCallback : IInteractionCallBack
     {

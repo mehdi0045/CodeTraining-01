@@ -1,6 +1,5 @@
-using UnityEngine;
 
-namespace ConditionSystem
+namespace Condition.Interface
 {
     public interface IConditionArgs
     {

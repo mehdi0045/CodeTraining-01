@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Attribute;
-using Attribute.Interfaces;
+using Attribute.Base;
+using AttributeBase.Interfaces;
 using UnityEngine;
 
 namespace Handlers

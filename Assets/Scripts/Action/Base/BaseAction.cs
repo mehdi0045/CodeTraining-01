@@ -1,13 +1,13 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Action.Interface;
+using Enums.Statuses;
 
 namespace Action.Base
 {
     public class BaseAction : IAction
     {
-        public BaseAction(string id, string name, IActionStep[] actionSteps)
+        public BaseAction(string id, string name, IActionSequence[] actionSteps)
         {
             Id = id;
             Name = name;
@@ -18,7 +18,7 @@ namespace Action.Base
     
         public string Name { get; set; }
     
-        public IActionStep[] ActionSteps { get; set; }
+        public IActionSequence[] ActionSteps { get; set; }
 
         public async Task<IInteractionCallBack> Action(IActionArgs iArgs)
         {
@@ -28,7 +28,7 @@ namespace Action.Base
             {
                 await step.ActionStep(iArgs,customData);
             }
-            return new BaseInteractionCallback((int) EnumActionStatus.ActionStart);
+            return new BaseInteractionCallback((int) EnumActionStatuses.ActionStart);
         }
     }
 }

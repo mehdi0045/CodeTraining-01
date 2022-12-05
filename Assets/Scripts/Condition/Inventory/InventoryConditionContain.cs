@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-using Extensions;
-using InventorySystem;
+using Condition.Interface;
+using Extensions.Item;
+using Inventory.Interface;
 
-namespace ConditionSystem
+namespace Condition.InventorySystem
 {
-    public class InventoryConditionNotContain : ICondition
+    public class InventoryConditionContain : ICondition
     {
         public string Id { get; set; }
         public IConditionCallback Check(IConditionArgs iArgs)
@@ -13,11 +14,11 @@ namespace ConditionSystem
             var have = Contain(args.Inventory.Slots,args.Item);
             if (have)
             {
-                return  new ConditionInventoryCallback(false, (int)EnumInventoryStatuses.ItemAlreadyExist);
+                return  new ConditionInventoryCallback(true, (int)EnumInventoryStatuses.Success);
             }
             else
             {
-                return  new ConditionInventoryCallback(true, (int)EnumInventoryStatuses.Success);
+                return  new ConditionInventoryCallback(false, (int)EnumInventoryStatuses.ItemIsNotExist);
             }
         }
         private bool Contain(List<ISlot> slots, IItem item)

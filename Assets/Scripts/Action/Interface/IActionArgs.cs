@@ -1,6 +1,4 @@
 
-using Action.Interface;
-
 namespace Action.Interface
 {
     public interface IActionArgs 

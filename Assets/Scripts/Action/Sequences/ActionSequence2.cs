@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Action.Base;
 using Action.Interface;
+using Enums.Statuses;
 using UnityEngine;
 
-namespace Action
+namespace Action.Sequences
 {
-    public class ActionStep2 : IActionStep
+    public class ActionSequence2 : IActionSequence
     {
-        public ActionStep2()
+        public ActionSequence2()
         {
             Id = "0";
             Name = "Log 1";
         }
-        public ActionStep2(string id, string name)
+        public ActionSequence2(string id, string name)
         {
             Id = id;
             Name = name;
@@ -24,14 +26,14 @@ namespace Action
 
         public async Task<IInteractionCallBack> ActionStep(IActionArgs iArgs,Dictionary<string, object> customData)
         {
-            var callbackStart = new BaseInteractionCallback((int) EnumActionStatus.ActionStart);
-            Debug.Log((EnumActionStatus)callbackStart.Status);
+            var callbackStart = new BaseInteractionCallback((int) EnumActionStatuses.ActionStart);
+            Debug.Log((EnumActionStatuses)callbackStart.Status);
             Debug.Log(customData["Hp"]);
             await Task.Delay(1000);
             Debug.Log("4");
             await Task.Delay(1000);
-            var callbackEnd = new BaseInteractionCallback((int) EnumActionStatus.ActionEnd);
-            Debug.Log((EnumActionStatus)callbackEnd.Status);
+            var callbackEnd = new BaseInteractionCallback((int) EnumActionStatuses.ActionEnd);
+            Debug.Log((EnumActionStatuses)callbackEnd.Status);
             return callbackEnd;
         }
     }

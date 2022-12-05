@@ -1,8 +1,6 @@
-
 using System.Threading.Tasks;
-using Action.Interface;
 
-namespace Action
+namespace Action.Interface
 {
     public interface IAction 
     {
@@ -10,7 +8,7 @@ namespace Action
         
         string Name { get; set; }
         
-        IActionStep[] ActionSteps { get; set; }
+        IActionSequence[] ActionSteps { get; set; }
         
         Task<IInteractionCallBack> Action(IActionArgs iArgs);
     }

@@ -1,4 +1,5 @@
-using InventorySystem;
+using HUD.Item;
+using Inventory.Interface;
 using UnityEngine;
 using UnityEngine.UI;
 

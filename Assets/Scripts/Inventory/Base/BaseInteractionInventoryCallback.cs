@@ -1,5 +1,6 @@
-﻿
-namespace InventorySystem
+﻿using Inventory.Interface;
+
+namespace Inventory.Base
 {
     public struct BaseInteractionInventoryCallback : IInteractionInventoryCallback
     {

@@ -1,7 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "New ItemHud Holder" , fileName = "ItemHolder")]
-public class ItemHudHolder : ScriptableObject
+namespace HUD.Item
 {
-    public ItemHudInfo[] ItemInfos;
+    [CreateAssetMenu(menuName = "New ItemHud Holder" , fileName = "ItemHolder")]
+    public class ItemHudHolder : ScriptableObject
+    {
+        public ItemHudInfo[] ItemInfos;
+    }
 }

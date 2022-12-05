@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-using Action;
 using UnityEngine;
 
-public class ActionHandler : MonoBehaviour
+namespace Handlers
 {
-    private List<IAction> actions;
+    public class ActionHandler : MonoBehaviour
+    {
+    }
 }
 
 

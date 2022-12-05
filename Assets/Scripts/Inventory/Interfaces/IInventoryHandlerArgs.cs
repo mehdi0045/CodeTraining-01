@@ -1,5 +1,5 @@
 
-namespace InventorySystem
+namespace Inventory.Interface
 {
     public interface IInventoryHandlerArgs 
     {

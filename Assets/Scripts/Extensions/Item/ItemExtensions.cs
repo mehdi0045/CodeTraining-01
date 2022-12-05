@@ -1,6 +1,6 @@
-using InventorySystem;
+using Inventory.Interface;
 
-namespace Extensions
+namespace Extensions.Item
 {
     public static class ItemExtensions
     {

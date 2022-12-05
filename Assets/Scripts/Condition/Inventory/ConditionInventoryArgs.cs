@@ -1,6 +1,7 @@
-using InventorySystem;
+using Condition.Interface;
+using Inventory.Interface;
 
-namespace ConditionSystem
+namespace Condition.InventorySystem
 {
     public struct ConditionInventoryArgs : IConditionArgs
     {

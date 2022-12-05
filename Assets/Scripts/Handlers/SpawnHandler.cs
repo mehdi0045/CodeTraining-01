@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class SpawnHandler : MonoBehaviour
+namespace Handlers
 {
-    public delegate void OnPlayerSpawnDelegate(Controller player);
-    public event OnPlayerSpawnDelegate OnPlayerSpawn;
-
-    [SerializeField] private Controller player;
-    private void Start()
+    public class SpawnHandler : MonoBehaviour
     {
-        OnOnPlayerSpawn(player);
-    }
+        public delegate void OnPlayerSpawnDelegate(Controller player);
+        public event OnPlayerSpawnDelegate OnPlayerSpawn;
 
-    protected virtual void OnOnPlayerSpawn(Controller player)
-    {
-        OnPlayerSpawn?.Invoke(player);
+        [SerializeField] private Controller player;
+        private void Start()
+        {
+            OnOnPlayerSpawn(player);
+        }
+
+        protected virtual void OnOnPlayerSpawn(Controller player)
+        {
+            OnPlayerSpawn?.Invoke(player);
+        }
     }
 }

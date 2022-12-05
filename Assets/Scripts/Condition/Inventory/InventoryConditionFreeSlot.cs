@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
-using InventorySystem;
+using Condition.Interface;
+using Inventory.Interface;
 
-namespace ConditionSystem
+namespace Condition.InventorySystem
 {
     public class InventoryConditionFreeSlot : ICondition
     {

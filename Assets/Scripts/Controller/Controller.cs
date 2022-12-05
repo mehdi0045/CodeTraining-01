@@ -1,11 +1,12 @@
 using System.Collections.Generic;
-using Action;
+using System.Threading.Tasks;
 using Action.Base;
-using Action.Steps;
-using Attribute;
+using Action.Interface;
+using Action.Sequences;
+using Attribute.Base;
 using Handlers;
+using Inventory.Base;
 using UnityEngine;
-using InventorySystem;
 
 public class Controller : MonoBehaviour
 {
@@ -26,10 +27,10 @@ public class Controller : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         movement = new MovementComponent(_speed,_turnSmothVelocity,_controller,camTransform,transform);
         
-        action = new BaseAction("01","Log",new IActionStep[]
+        action = new BaseAction("01","Log",new IActionSequence[]
         {
-            new ActionStep1(),
-            new ActionStep2(), 
+            new ActionSequence1(),
+            new ActionSequence2(), 
         });
         
         attributeHandler.Init(new List<BaseAttribute>()
@@ -39,12 +40,12 @@ public class Controller : MonoBehaviour
         });
     }
 
-    private void Update()
+    private async Task Update()
     {
         movement.Move(_animator);
         if (Input.GetKeyDown(KeyCode.J))
         {
-            action.Action(new BaseActionArgs());
+            await action.Action(new BaseActionArgs());
         }
     }
 

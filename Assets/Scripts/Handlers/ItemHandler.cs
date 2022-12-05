@@ -1,18 +1,23 @@
-using InventorySystem;
+using Inventory.Base;
+using Inventory.Interface;
+using Items;
 using UnityEngine;
 
-public class ItemHandler : MonoBehaviour
+namespace Handlers
 {
-    public IItem iItem;
-    [SerializeField] private Item item;
-
-    private void Awake()
+    public class ItemHandler : MonoBehaviour
     {
-        iItem = new BaseItem(item.Id,item.Name,item.Type);
-    }
+        public IItem iItem;
+        [SerializeField] private Item item;
 
-    public void DestroyObject()
-    {
-        Destroy(gameObject);
+        private void Awake()
+        {
+            iItem = new BaseItem(item.Id,item.Name,item.Type);
+        }
+
+        public void DestroyObject()
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -1,22 +1,24 @@
- using System;
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class ItemHudManager : MonoBehaviour
+namespace HUD.Item
 {
-    public ItemHudHolder itemHudHolder;
-    
-    public bool FindItem(string id , out ItemHud itemHud)
+    public class ItemHudManager : MonoBehaviour
     {
-        var find = Array.Find(itemHudHolder.ItemInfos, i => i.Id == id);
-        var itemObject = Resources.Load<ItemHud>(find.ResourcePath);
-        if (itemObject == null)
+        public ItemHudHolder itemHudHolder;
+    
+        public bool FindItem(string id , out ItemHud itemHud)
         {
-            itemHud = null;
-            return false;
-        }
+            var find = Array.Find(itemHudHolder.ItemInfos, i => i.Id == id);
+            var itemObject = Resources.Load<ItemHud>(find.ResourcePath);
+            if (itemObject == null)
+            {
+                itemHud = null;
+                return false;
+            }
         
-        itemHud = itemObject;
-        return true;
+            itemHud = itemObject;
+            return true;
+        }
     }
 }

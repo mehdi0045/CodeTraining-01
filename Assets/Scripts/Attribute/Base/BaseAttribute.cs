@@ -1,7 +1,6 @@
+using AttributeBase.Interfaces;
 
-using Attribute.Interfaces;
-
-namespace Attribute
+namespace Attribute.Base
 {
     public class BaseAttribute : IAttribute
     {

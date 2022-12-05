@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
-using ConditionSystem;
-using Extensions;
+using Condition.Interface;
+using Condition.InventorySystem;
+using Enums.Types.Item;
+using Extensions.Item;
+using Inventory.Interface;
 
-namespace InventorySystem
+namespace Inventory.Base
 {
     public class BaseInventory : IInventory
     {

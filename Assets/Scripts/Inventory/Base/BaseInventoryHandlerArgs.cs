@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Inventory.Interface;
 
-namespace InventorySystem
+namespace Inventory.Base
 {
     public class BaseInventoryHandlerArgs : IInventoryHandlerArgs
     {

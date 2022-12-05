@@ -1,4 +1,5 @@
-namespace ConditionSystem
+
+namespace Condition.Interface
 {
     public interface IConditionCallback
     {

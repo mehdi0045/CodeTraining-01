@@ -1,5 +1,8 @@
 using System.Collections.Generic;
-using InventorySystem;
+using Handlers;
+using HUD.Item;
+using Inventory.Base;
+using Inventory.Interface;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using Extensions;
+using Extensions.Item;
+using Inventory.Interface;
 
-namespace InventorySystem
+namespace Inventory.Base
 {
     public class BaseInventoryHandler : IInventoryHandler
     {

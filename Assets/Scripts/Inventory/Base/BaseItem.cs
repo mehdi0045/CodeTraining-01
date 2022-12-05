@@ -1,5 +1,6 @@
+using Inventory.Interface;
 
-namespace InventorySystem
+namespace Inventory.Base
 {
     public class BaseItem : IItem
     {

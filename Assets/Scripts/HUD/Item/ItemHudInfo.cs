@@ -1,8 +1,11 @@
 using System;
 
-[Serializable]
-public struct ItemHudInfo
+namespace HUD.Item
 {
-    public string Id;
-    public string ResourcePath;
+    [Serializable]
+    public struct ItemHudInfo
+    {
+        public string Id;
+        public string ResourcePath;
+    }
 }

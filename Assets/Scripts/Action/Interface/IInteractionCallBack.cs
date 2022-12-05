@@ -1,5 +1,8 @@
 
-public interface IInteractionCallBack 
+namespace Action.Interface
 {
-    int Status { get; set; }
+    public interface IInteractionCallBack 
+    {
+        int Status { get; set; }
+    }
 }
