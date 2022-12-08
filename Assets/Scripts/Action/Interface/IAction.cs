@@ -11,5 +11,7 @@ namespace Action.Interface
         IActionSequence[] ActionSteps { get; set; }
         
         Task<IInteractionCallBack> Action(IActionArgs iArgs);
+        
+        
     }
 }

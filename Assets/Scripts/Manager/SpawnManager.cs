@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Handlers
+namespace Manager
 {
-    public class SpawnHandler : MonoBehaviour
+    public class SpawnManager : MonoBehaviour
     {
         public delegate void OnPlayerSpawnDelegate(Controller player);
         public event OnPlayerSpawnDelegate OnPlayerSpawn;

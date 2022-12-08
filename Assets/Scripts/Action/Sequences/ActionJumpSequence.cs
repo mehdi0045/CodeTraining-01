@@ -4,35 +4,41 @@ using Action.Base;
 using Action.Interface;
 using Enums.Statuses;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Action.Sequences
 {
-    public class ActionSequence1 : IActionSequence
+    public class ActionJumpSequence : IActionSequence
     {
-        public ActionSequence1()
+        public ActionJumpSequence(Rigidbody rb)
         {
             Id = "0";
             Name = "Log 1";
+            _rb = rb;
         }
-
         public string Id { get; set; }
         
         public string Name { get; set; }
 
-        public async Task<IInteractionCallBack> ActionStep(IActionArgs iArgs ,Dictionary<string, object> customData)
+        private Rigidbody _rb;
+        
+        private float _speed;
+
+        
+        public async Task<IInteractionCallBack> ActionStep(IActionArgs iArgs, Dictionary<string, object> customData)
         {
             var callbackStart = new BaseInteractionCallback((int) EnumActionStatuses.ActionStart);
             Debug.Log((EnumActionStatuses)callbackStart.Status);
-            Debug.Log("1");
-            await Task.Delay(1000);
-            Debug.Log("2");
-            await Task.Delay(1000);
             
-            customData.Add("Hp", "mehdi khookhi");
+            _rb.AddForce(Vector3.up * 200);
+            _rb.AddForce(Vector3.forward * 200);
             
             var callbackEnd = new BaseInteractionCallback((int) EnumActionStatuses.ActionEnd);
             Debug.Log((EnumActionStatuses)callbackEnd.Status);
             return callbackEnd;
         }
+        
+        
     }
+    
 }

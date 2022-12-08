@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemInfos:
   - Id: 01
-    ResourcePath: ItemHudHolder/HealthBoster-01
+    ResourcePath: ItemsHud\HealthBoster-01

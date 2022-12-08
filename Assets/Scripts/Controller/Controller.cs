@@ -1,64 +1,102 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Action.Base;
 using Action.Interface;
 using Action.Sequences;
 using Attribute.Base;
+using Condition.Interface;
+using Condition.InventorySystem;
+using Controllers.Base;
 using Handlers;
+using Handlers.Interfaces;
 using Inventory.Base;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class Controller : BaseController
 {
     [SerializeField] private float _speed;
     [SerializeField] private Transform camTransform;
     [SerializeField] private Animator _animator;
-    
-    private MovementComponent movement;
+
     private float _turnSmothVelocity;
-    private CharacterController _controller;
+    private Rigidbody _rb;
     private BaseItem item;
 
     public InventoryHandler inventoryHandler;
     public AttributeHandler attributeHandler;
-    private BaseAction action;
+    public ActionHandler actionHandler;
+    public PickupHandler pickupHandler;
+    public InputHandler inputHandler;
+    public MovementHandler movementHandler;
+
     private void Awake()
     {
-        _controller = GetComponent<CharacterController>();
-        movement = new MovementComponent(_speed,_turnSmothVelocity,_controller,camTransform,transform);
+        _rb = GetComponent<Rigidbody>();
+        SetupHandlers();
+    }
+
+    private void SetupHandlers()
+    {
+        item = new BaseItem("01", "HpBoster", "TypeA");
         
-        action = new BaseAction("01","Log",new IActionSequence[]
-        {
-            new ActionSequence1(),
-            new ActionSequence2(), 
-        });
         
-        attributeHandler.Init(new List<BaseAttribute>()
+        attributeHandler.Setup(new List<BaseAttribute>()
         {
-            new BaseAttribute("Health",0,100,100),
-            new BaseAttribute("Mana",0,100,100),
+            new BaseAttribute("Health", 0, 100, 100),
+            new BaseAttribute("Mana", 0, 100, 100),
         });
-    }
 
-    private async Task Update()
-    {
-        movement.Move(_animator);
-        if (Input.GetKeyDown(KeyCode.J))
+        var action = new BaseAction("01","Dive",new IActionSequence[]
         {
-            await action.Action(new BaseActionArgs());
-        }
+            new ActionJumpSequence(_rb),
+            new ActionAnimationSequence(_animator)
+        });
+        actionHandler.Setup(new IAction[]{action});
+        
+        var inventory = new BaseInventory("01","Inventoryname",8,new ICondition[]
+            {
+                new InventoryConditionFreeSlot(), 
+                new InventoryConditionNotContain(), 
+            }, 
+            new ICondition[]
+            {
+                new InventoryConditionContain(), 
+            });
+        inventoryHandler.Setup(inventory);
+        
+        InitAllHandlers();
+        SetupHandlerLink();
+
     }
 
-    private void Pickup(Collider collider)
+    private void FixedUpdate()
     {
-        var gameItem =  collider.GetComponent<Collider>().GetComponent<ItemHandler>();
-        var callback = inventoryHandler.inventory.Add(gameItem.iItem);
-        Debug.Log((EnumInventoryStatuses)callback.Status);
-        gameItem.DestroyObject();
+        movementHandler.Move(_rb,transform);
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void SetupHandlerLink()
     {
-        Pickup(collider);
+        HandlerLinks = new List<IHandlerLink>();
+        
+        AddHandlerLink(new ActionHandlerLink());
+        AddHandlerLink(new PickupHandlerLink());
+        AddHandlerLink(new InventoryHandlerLink());
+        AddHandlerLink(new MovementHandlerLink());
+        InitHandlersLink(this);
+        
+    }
+
+    private void InitAllHandlers()
+    {
+        Handlers = new List<IHandler>();
+        AddHandler(inventoryHandler);
+        AddHandler(attributeHandler);
+        AddHandler(actionHandler);
+        AddHandler(pickupHandler);
+        AddHandler(inputHandler);
+        AddHandler(movementHandler);
+        InitHandlers(this);
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HUD.Item
 {
-    public class ItemHudManager : MonoBehaviour
+    public class ItemHudResource : MonoBehaviour
     {
         public ItemHudHolder itemHudHolder;
     

@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using Attribute.Base;
 using AttributeBase.Interfaces;
+using Handlers.Interfaces;
 using UnityEngine;
 
 namespace Handlers
 {
-    public class AttributeHandler : MonoBehaviour
+    public class AttributeHandler : MonoBehaviour,IHandler
     {
         #region Events
 
-        public delegate void OnIncreaseAttributeDelegate(IAttribute attribute );
+        public delegate void OnIncreaseAttributeDelegate(IAttribute attribute);
         public event OnIncreaseAttributeDelegate OnIncreaseAttribute;
         
         public delegate void OnDecreaseAttributeDelegate(IAttribute attribute);
@@ -28,11 +29,13 @@ namespace Handlers
         
         private List<BaseAttribute> _attributes;
 
-        public void Init(List<BaseAttribute> attribute)
+        public void Setup(List<BaseAttribute> attribute)
         {
             _attributes = attribute;
         }
-        
+        public void Init(IController controller)
+        {
+        }
         private BaseAttribute Find(string name)
         {
             var attribute = _attributes.Find(i => i.Name == name);
@@ -100,6 +103,7 @@ namespace Handlers
         
 
         #endregion
+
         
     }
 }

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Handlers;
 using HUD.Item;
 using Inventory.Base;
 using Inventory.Interface;
+using Manager;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,18 +11,19 @@ namespace HUD.Inventory
     public class InventoryHud : MonoBehaviour
     {
         private BaseInventory _inventory;
-        [SerializeField] private ItemHudManager itemHudManager;
-        [SerializeField] private SpawnHandler spawnHandler;
+        [SerializeField] private ItemHudResource itemHudResource;
+        [SerializeField] private SpawnManager spawnManager;
 
+        [SerializeField] private GameObject inventoryUi;
         [SerializeField] private GameObject slotPrefab;
     
         private List<SlotHud> slots = new List<SlotHud>();
     
         public GameObject _slot;
-
+        
         private void OnEnable()
         {
-            spawnHandler.OnPlayerSpawn += OnPlayerSpawnCallback;
+            spawnManager.OnPlayerSpawn += OnPlayerSpawnCallback;
         }
 
         private void OnDisable()
@@ -32,7 +33,7 @@ namespace HUD.Inventory
 
         private void UnSubscript()
         {
-            spawnHandler.OnPlayerSpawn -= OnPlayerSpawnCallback;
+            spawnManager.OnPlayerSpawn -= OnPlayerSpawnCallback;
             _inventory.OnItemAdded -= OnItemAddedCallback;
             _inventory.OnItemAdded -= OnItemRemovedCallback;
         }
@@ -49,10 +50,10 @@ namespace HUD.Inventory
         #region Events
         private void OnPlayerSpawnCallback(Controller player)
         {
-            SubscriptInventory(player.inventoryHandler.inventory);
+            SubscriptInventory(player.inventoryHandler.GetActiveInventory());
+            player.inputHandler.OnInputInventory += OnInputInentoryCallback;
         }
-    
-        
+
         private void OnItemAddedCallback(IInventory inventory, IItem item , int index)
         {
             AddItemHud(item,index);
@@ -62,7 +63,19 @@ namespace HUD.Inventory
         {
             RemoveItemHud(item,index);
         }
-
+        private void OnInputInentoryCallback()
+        {
+            if (inventoryUi.activeSelf)
+            {
+                EmptyInventory();
+                inventoryUi.SetActive(false);
+            }
+            else
+            {
+                CheckInventory();
+                inventoryUi.SetActive(true);
+            }
+        }
         #endregion
     
         private void CreateSlots(int slotCount)
@@ -81,7 +94,8 @@ namespace HUD.Inventory
         private void AddItemHud(IItem item , int index)
         {
             var slot = GetSlotByIndex(index);
-            itemHudManager.FindItem(item.Id, out var lItem);
+
+            itemHudResource.FindItem(item.Id, out var lItem);
             slot.SetSlot(lItem,item);
         }
     
@@ -94,6 +108,25 @@ namespace HUD.Inventory
         private SlotHud GetSlotByIndex(int index)
         {
             return slots[index];
+        }
+
+        private void EmptyInventory()
+        {
+            foreach (var slotHud in slots)
+            {
+                slotHud.EmptySLot();
+            }
+        }
+        
+        private void CheckInventory()
+        {
+            foreach (var slot in _inventory.Slots)
+            {
+                if (!slot.IsFree())
+                {
+                    AddItemHud(slot.Item,slot.Index);
+                }
+            }
         }
     }
 }
